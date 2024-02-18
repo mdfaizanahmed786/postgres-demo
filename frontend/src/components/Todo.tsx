@@ -6,7 +6,13 @@ export type SingleTodo = {
 };
 
 const Todo = ({ id, title, description, getAllTodos }: SingleTodo) => {
+
   const editTodo = async () => {
+    const newTitle=prompt('Enter new title', title);
+    const newDescription=prompt('Enter new description', description);
+    if(!newTitle || !newDescription){
+      return;
+    }
     try {
       const response = await fetch(`http://localhost:4000/edit/${id}`, {
         method: "PUT",
@@ -14,8 +20,8 @@ const Todo = ({ id, title, description, getAllTodos }: SingleTodo) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          title,
-          description,
+          title: newTitle,
+          description: newDescription,
         }),
       });
       const data = await response.json();

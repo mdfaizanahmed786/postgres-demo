@@ -49,7 +49,7 @@ app.put("/edit/:id", async(req:Request, res:Response)=>{
       return res.status(400).json({success:false, message:'Please provide a client id....'})
     }
 
-    const updateQuery="UPDATE todos set todos.title=$1 and todos.description=$2 where todos.id=$3;"
+    const updateQuery="UPDATE todos SET title=$1, description=$2 WHERE id=$3;";
    const result=await dbConnect.client.query(updateQuery, [title, description, req.params.id])
    console.log(result)
 
